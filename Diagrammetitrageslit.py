@@ -8,10 +8,10 @@ st.set_page_config(page_title="Simulation d'un titrage", page_icon="⚗️")
 # Titre principal
 st.markdown("<h1 style='font-size: 36px;'>Simulation d'un titrage</h1>", unsafe_allow_html=True)
 
-# Demande des noms des réactifs et produits
-titrant = st.text_input("Nom du réactif titrant", "Titrant")
-titre = st.text_input("Nom du réactif titré", "Titre")
-produit1 = st.text_input("Nom du premier produit formé", "Produit 1")
+# Demande des noms des réactifs et produits avec syntaxe LaTeX
+titrant = st.text_input("Nom du réactif titrant (utilisez ^ pour les exposants et _ pour les indices)", "H^+")
+titre = st.text_input("Nom du réactif titré (utilisez ^ pour les exposants et _ pour les indices)", "OH^-")
+produit1 = st.text_input("Nom du premier produit formé (utilisez ^ pour les exposants et _ pour les indices)", "H_2O")
 produit2 = st.text_input("Nom du deuxième produit formé (laisser vide si aucun)", "")
 
 # Demande des coefficients stoechiométriques
@@ -78,14 +78,26 @@ fig, ax = plt.subplots()
 ax.bar(labels, quantities, color=colors)
 y_max = max(quantite_initiale_titre, quantite_produit1[-1], quantite_produit2[-1], quantite_titrant[-1]) * 1.1
 ax.set_ylim(0, y_max)
-equation_text = f"{int(coeff_titrant)}{titrant} + {int(coeff_titre)}{titre} → {int(coeff_produit1)}{produit1}"
-if produit2:
-    equation_text += f" + {int(coeff_produit2)}{produit2}"
-ax.set_title(equation_text)
 
-# Afficher les quantités au-dessus des barres
-for i, (height, label) in enumerate(zip(quantities, labels)):
-    ax.text(i, height + 0.1, f'{height:.2f}', ha='center')
+# Génération de l'équation de réaction avec suppression des coefficients de 1
+equation_text = (
+    rf"${'' if coeff_titrant == 1 else int(coeff_titrant)}{titrant} + "
+    rf"{'' if coeff_titre == 1 else int(coeff_titre)}{titre} \rightarrow "
+    rf"{'' if coeff_produit1 == 1 else int(coeff_produit1)}{produit1}"
+)
+if produit2:
+    equation_text += rf" + {'' if coeff_produit2 == 1 else int(coeff_produit2)}{produit2}"
+
+# Appliquer LaTeX dans l'équation
+ax.set_title(equation_text, pad=20)
+
+# Ajouter les noms des réactifs et produits sous les barres en utilisant LaTeX
+for i, label in enumerate(labels):
+    ax.text(i, -y_max * 0.05, f"${label}$", ha='center', va='top', fontsize=12)
+
+# Afficher les quantités juste au-dessus des barres
+for i, height in enumerate(quantities):
+    ax.text(i, height + 0.02, f'{height:.2f}', ha='center')
 
 # Afficher le graphique dans Streamlit
 st.pyplot(fig)
