@@ -99,8 +99,8 @@ ax.set_title(rf"${equation_text}$", pad=20)
 
 # Ajouter les noms des réactifs et produits sous les barres en utilisant LaTeX
 for i, (label, bar) in enumerate(zip(labels, bars)):
-    # Utiliser LaTeX pour les labels et les placer sous les barres
-    ax.text(bar.get_x() + bar.get_width() / 2, -y_max * 0.05, f"${label}$", ha='center', va='top', fontsize=12)
+    # Utiliser LaTeX pour les labels et les placer sous les barres sans duplication
+    ax.text(bar.get_x() + bar.get_width() / 2, -y_max * 0.1, f"${label}$", ha='center', va='top', fontsize=12)
 
 # Afficher les quantités juste au-dessus des barres
 for bar, quantity in zip(bars, quantities):
