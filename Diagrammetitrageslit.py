@@ -3,10 +3,10 @@ import matplotlib.pyplot as plt
 import streamlit as st
 
 # Configurer le nom et l'icône de la page
-st.set_page_config(page_title="Simulation de titrage chimique", page_icon="⚗️")
+st.set_page_config(page_title="Simulation d'un titrage", page_icon="⚗️")
 
 # Titre principal
-st.markdown("<h1 style='font-size: 36px; color: #333333;'>Simulation de titrage chimique</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='font-size: 36px;'>Simulation d'un titrage</h1>", unsafe_allow_html=True)
 
 # Demande des noms des réactifs et produits
 titrant = st.text_input("Nom du réactif titrant", "Titrant")
