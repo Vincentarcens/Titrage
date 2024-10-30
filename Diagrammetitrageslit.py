@@ -85,17 +85,17 @@ bars = ax.bar(labels, quantities, color=colors)
 y_max = max(quantite_initiale_titre, quantite_produit1[-1], quantite_produit2[-1], quantite_titrant[-1]) * 1.1
 ax.set_ylim(0, y_max)
 
-# Génération de l'équation de réaction avec suppression des coefficients de 1
+# Génération de l'équation de réaction avec suppression des coefficients de 1 et en LaTeX
 equation_text = (
-    rf"${'' if coeff_titrant == 1 else int(coeff_titrant)}{titrant} + "
-    rf"{'' if coeff_titre == 1 else int(coeff_titre)}{titre} \rightarrow "
-    rf"{'' if coeff_produit1 == 1 else int(coeff_produit1)}{produit1}"
+    f"{'' if coeff_titrant == 1 else int(coeff_titrant)}{titrant} + "
+    f"{'' if coeff_titre == 1 else int(coeff_titre)}{titre} \\rightarrow "
+    f"{'' if coeff_produit1 == 1 else int(coeff_produit1)}{produit1}"
 )
 if produit2:
-    equation_text += rf" + {'' if coeff_produit2 == 1 else int(coeff_produit2)}{produit2}"
+    equation_text += f" + {'' if coeff_produit2 == 1 else int(coeff_produit2)}{produit2}"
 
 # Appliquer LaTeX dans l'équation
-ax.set_title(equation_text, pad=20)
+ax.set_title(rf"${equation_text}$", pad=20)
 
 # Ajouter les noms des réactifs et produits sous les barres en utilisant LaTeX
 for i, (label, bar) in enumerate(zip(labels, bars)):
