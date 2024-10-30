@@ -85,6 +85,9 @@ bars = ax.bar(range(len(labels)), quantities, color=colors)  # Utiliser des indi
 y_max = max(quantite_initiale_titre, quantite_produit1[-1], quantite_produit2[-1], quantite_titrant[-1]) * 1.1
 ax.set_ylim(0, y_max)
 
+# Masquer les graduations de l'axe x
+ax.set_xticks([])
+
 # Génération de l'équation de réaction avec suppression des coefficients de 1 et en LaTeX
 equation_text = (
     f"{'' if coeff_titrant == 1 else int(coeff_titrant)}{titrant} + "
