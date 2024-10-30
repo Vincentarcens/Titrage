@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import streamlit as st
 
-# Configurer le nom et l'icône de la page
+# Configurer le titre et l'icône de la page
 st.set_page_config(page_title="Simulation d'un titrage", page_icon="⚗️")
 
 # Titre principal
@@ -81,7 +81,7 @@ if produit2:
 
 # Préparation du graphique
 fig, ax = plt.subplots()
-bars = ax.bar(labels, quantities, color=colors)
+bars = ax.bar(range(len(labels)), quantities, color=colors)  # Utiliser des indices pour masquer les labels
 y_max = max(quantite_initiale_titre, quantite_produit1[-1], quantite_produit2[-1], quantite_titrant[-1]) * 1.1
 ax.set_ylim(0, y_max)
 
