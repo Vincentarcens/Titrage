@@ -3,12 +3,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 import streamlit as st
 
+st.set_page_config(page_title="Simulation d'une titrage", page_icon="⚗️")
+st.markdown("<h1 style='font-size: 36px; color: #333333;'>Simulation d'un titrage</h1>", unsafe_allow_html=True)
+
 # Initialisation des valeurs de session
 if "avancement" not in st.session_state:
     st.session_state.avancement = 0.0
 
 # Demande des noms des réactifs pour le titrage
-st.title("Simulation de titrage chimique")
 titrant = st.text_input("Nom du réactif titrant", "Titrant")
 titre = st.text_input("Nom du réactif titré", "Titre")
 produit1 = st.text_input("Nom du premier produit formé", "Produit 1")
