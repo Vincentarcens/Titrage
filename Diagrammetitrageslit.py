@@ -81,7 +81,7 @@ if produit2:
 
 # Préparation du graphique
 fig, ax = plt.subplots()
-ax.bar(labels, quantities, color=colors)
+bars = ax.bar(labels, quantities, color=colors)
 y_max = max(quantite_initiale_titre, quantite_produit1[-1], quantite_produit2[-1], quantite_titrant[-1]) * 1.1
 ax.set_ylim(0, y_max)
 
@@ -98,12 +98,13 @@ if produit2:
 ax.set_title(equation_text, pad=20)
 
 # Ajouter les noms des réactifs et produits sous les barres en utilisant LaTeX
-for i, label in enumerate(labels):
-    ax.text(i, -y_max * 0.05, f"${label}$", ha='center', va='top', fontsize=12)
+for i, (label, bar) in enumerate(zip(labels, bars)):
+    # Utiliser LaTeX pour les labels et les placer sous les barres
+    ax.text(bar.get_x() + bar.get_width() / 2, -y_max * 0.05, f"${label}$", ha='center', va='top', fontsize=12)
 
 # Afficher les quantités juste au-dessus des barres
-for i, height in enumerate(quantities):
-    ax.text(i, height + 0.02, f'{height:.2f}', ha='center')
+for bar, quantity in zip(bars, quantities):
+    ax.text(bar.get_x() + bar.get_width() / 2, quantity + 0.02 * y_max, f'{quantity:.2f}', ha='center')
 
 # Afficher le graphique dans Streamlit
 st.pyplot(fig)
