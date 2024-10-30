@@ -8,10 +8,16 @@ st.set_page_config(page_title="Simulation d'un titrage", page_icon="⚗️")
 # Titre principal
 st.markdown("<h1 style='font-size: 36px;'>Simulation d'un titrage</h1>", unsafe_allow_html=True)
 
-# Demande des noms des réactifs et produits avec syntaxe LaTeX
-titrant = st.text_input("Nom du réactif titrant (utilisez ^ pour les exposants et _ pour les indices)", "H^+")
-titre = st.text_input("Nom du réactif titré (utilisez ^ pour les exposants et _ pour les indices)", "OH^-")
-produit1 = st.text_input("Nom du premier produit formé (utilisez ^ pour les exposants et _ pour les indices)", "H_2O")
+# Demande des noms des réactifs et produits avec instructions pour LaTeX
+st.markdown(
+    "Entrez les noms des réactifs et produits en utilisant `^` pour les exposants et `_` pour les indices. "
+    "Par exemple, entrez `H_2O` pour H₂O ou `Mg^{2+}` pour Mg²⁺."
+)
+
+# Demande des noms des réactifs et produits
+titrant = st.text_input("Nom du réactif titrant", "H^+")
+titre = st.text_input("Nom du réactif titré", "OH^-")
+produit1 = st.text_input("Nom du premier produit formé", "H_2O")
 produit2 = st.text_input("Nom du deuxième produit formé (laisser vide si aucun)", "")
 
 # Demande des coefficients stoechiométriques
