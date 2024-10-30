@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import streamlit as st
 
-st.set_page_config(page_title="Simulation d'un titrage", page_icon="👨🏻‍🔬")
+st.set_page_config(page_title="Simulation d'un titrage", page_icon="⚗️")
 st.markdown("<h1 style='font-size: 36px;'>Simulation d'un titrage</h1>", unsafe_allow_html=True)
 
 # Initialisation des valeurs de session
